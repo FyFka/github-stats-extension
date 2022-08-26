@@ -1,15 +1,26 @@
 import { useEffect, useState } from "react";
+import { locRegExp } from "../constants";
+import useLocationSwap from "../hooks/useLocationSwap";
 
 const App = () => {
-  const [timer, setTimer] = useState(1);
+  const location = useLocationSwap();
+  const [isActive, setActive] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      setTimer((p) => p + 1);
-    }, 1000);
-  }, [timer]);
+    if (locRegExp.test(location) && document.querySelector("#js-pjax-container")) {
+      chrome.runtime.sendMessage({ type: "active" });
+      setActive(true);
+    } else {
+      chrome.runtime.sendMessage({ type: "inactive" });
+      setActive(false);
+    }
 
-  return <h1 style={{ fontSize: "120px", color: "red" }}>Hello {timer}</h1>;
+    return () => {
+      chrome.runtime.sendMessage({ type: "inactive" });
+    };
+  }, [location]);
+
+  return <>{isActive && <h1 style={{ fontSize: "120px", color: "red" }}>Hello {location}</h1>}</>;
 };
 
 export default App;
