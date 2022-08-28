@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { locRegExp } from "../constants";
+import useCache from "../hooks/useCache";
 import useFetch from "../hooks/useFetch";
 import useLocationSwap from "../hooks/useLocationSwap";
 import { IUser } from "../interfaces/IUser";
@@ -9,7 +10,7 @@ const App = () => {
   const location = useLocationSwap();
   const { getRepos } = useFetch();
   const [isActive, setActive] = useState(false);
-  const [cachedUsers, setCachedUsers] = useState<{ [key: string]: IUser }>({});
+  const { getFromCache, addToCache } = useCache();
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
 
   useEffect(() => {
@@ -31,17 +32,16 @@ const App = () => {
   }, []);
 
   const addUser = async (nickname: string) => {
-    if (cachedUsers[nickname]) {
-      setCurrentUser(cachedUsers[nickname]);
-      return;
+    const cachedUser = getFromCache(nickname);
+    if (cachedUser) {
+      return setCurrentUser(cachedUser);
     }
     const userReps = await getRepos(nickname);
-    setCachedUsers((prev) => ({ ...prev, [nickname]: { reps: userReps } }));
+    addToCache(nickname, { reps: userReps });
     setCurrentUser({ reps: userReps });
   };
 
   const toggleExtension = (status: boolean) => {
-    console.log("off", status);
     chrome.runtime.sendMessage({ type: status ? "active" : "inactive" });
     setActive(status);
   };

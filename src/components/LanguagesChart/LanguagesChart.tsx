@@ -6,19 +6,23 @@ interface ILanguagesChartProps {
 }
 
 const LanguagesChart = ({ reps }: ILanguagesChartProps) => {
-  const tobj: { [key: string]: { value: number; language: string } } = {};
-  reps.forEach((rep) => {
-    if (tobj[rep.language]) {
-      tobj[rep.language].value += 1;
-    } else if (rep.language) {
-      tobj[rep.language] = { value: 1, language: rep.language };
+  const languagesBuffer = reps.reduce<{ [key: string]: number }>((prev, next) => {
+    if (next.language) {
+      if (prev[next.language]) {
+        const prevTotal = prev[next.language] + 1;
+        return { ...prev, [next.language]: prevTotal };
+      } else {
+        return { ...prev, [next.language]: 1 };
+      }
+    } else {
+      return prev;
     }
-  });
+  }, {});
   const strokeColor = getComputedStyle(document.body).getPropertyValue("--color-fg-default");
-  const af = Object.values(tobj);
+  const preparedLanguages = Object.keys(languagesBuffer).map((key) => ({ value: languagesBuffer[key], language: key }));
   return (
     <ResponsiveContainer width="100%" height="100%" minHeight="220px">
-      <RadarChart cx="50%" cy="50%" outerRadius="80%" data={af}>
+      <RadarChart cx="50%" cy="50%" outerRadius="80%" data={preparedLanguages}>
         <PolarGrid />
         <PolarAngleAxis dataKey="language" stroke={strokeColor} />
         <Radar dataKey="value" stroke="#1e70ef" fill="#1f6feb" fillOpacity={0.7} />

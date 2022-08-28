@@ -14,7 +14,6 @@ const restoreRoot = () => {
   }
 
   mainContainer.append(root);
-  console.log("replaced");
 };
 
 (() => {
