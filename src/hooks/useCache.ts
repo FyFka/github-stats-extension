@@ -20,7 +20,6 @@ const useCache = () => {
   const getFromCache = (nickname: string) => {
     if (cachedUsers[nickname]) {
       if (validateCachedUser(cachedUsers[nickname])) {
-        console.log("GOT FROM CACHE -> ", nickname);
         return cachedUsers[nickname].user;
       } else {
         removeFromCache(nickname);
