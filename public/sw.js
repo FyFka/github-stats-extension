@@ -9,6 +9,7 @@ chrome.runtime.onMessage.addListener((request, sender) => {
       },
       tabId: sender.tab.id,
     });
+    chrome.action.setPopup({ popup: "active.html", tabId: sender.tab.id });
   } else if (request.type === "inactive") {
     chrome.action.setIcon({
       path: {
@@ -19,5 +20,6 @@ chrome.runtime.onMessage.addListener((request, sender) => {
       },
       tabId: sender.tab.id,
     });
+    chrome.action.setPopup({ popup: "inactive.html", tabId: sender.tab.id });
   }
 });

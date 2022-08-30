@@ -36,6 +36,9 @@ const App = () => {
   const addUser = async (nickname: string) => {
     const cachedUser = getFromCache(nickname);
     if (cachedUser) {
+      if (isLoading) {
+        setLoading(false);
+      }
       return setCurrentUser(cachedUser);
     }
     setLoading(true);
