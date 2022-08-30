@@ -1,6 +1,7 @@
 import { IUser } from "../../interfaces/IUser";
 import LanguagesChart from "../LanguagesChart/LanguagesChart";
 import PopularReposChart from "../PopularReposChart/PopularReposChart";
+import * as S from "./Sidebar.styles";
 
 interface ISidebarProps {
   user: IUser;
@@ -9,14 +10,14 @@ interface ISidebarProps {
 const Sidebar = ({ user }: ISidebarProps) => {
   return (
     <>
-      <div className="border-top color-border-muted pt-3 mt-3">
-        <h6 className="mb-2 h4">Languages</h6>
+      <S.Section>
+        <S.Title>Languages</S.Title>
         <LanguagesChart reps={user.reps} />
-      </div>
-      <div className="border-top color-border-muted pt-3 mt-3">
-        <h6 className="mb-2 h4">Popular Repos</h6>
+      </S.Section>
+      <S.Section>
+        <S.Title>Popular Repos</S.Title>
         <PopularReposChart reps={user.reps} />
-      </div>
+      </S.Section>
     </>
   );
 };

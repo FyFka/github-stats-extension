@@ -19,11 +19,11 @@ const PopularReposChart = ({ reps }: IPopularReposChartProps) => {
   return (
     <ResponsiveContainer width="100%" height="100%" minHeight="220px">
       <BarChart data={sorted} layout="vertical" onClick={handleOpenRepo}>
-        <CartesianGrid strokeDasharray="3 3" stroke={neutralColor} cursor="pointer" />
-        <YAxis dataKey="name" interval={0} type="category" fontSize="12px" color={neutralColor} cursor="pointer" />
-        <XAxis type="number" dataKey="stargazers_count" color={neutralColor} cursor="pointer" />
+        <CartesianGrid strokeDasharray="3 3" stroke={neutralColor} />
+        <YAxis dataKey="name" interval={0} type="category" fontSize="12px" color={neutralColor} />
+        <XAxis type="number" dataKey="stargazers_count" color={neutralColor} />
         <Tooltip content={<CustomTooltip />} />
-        <Bar dataKey="stargazers_count" fill="#1f6feb" fillOpacity={0.7} stroke="#1e70ef" cursor="pointer" />
+        <Bar dataKey="stargazers_count" fill="#1f6feb" fillOpacity={0.7} />
       </BarChart>
     </ResponsiveContainer>
   );

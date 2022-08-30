@@ -5,6 +5,7 @@ import useFetch from "../hooks/useFetch";
 import useLocationSwap from "../hooks/useLocationSwap";
 import { IUser } from "../interfaces/IUser";
 import Sidebar from "./Sidebar/Sidebar";
+import Skeleton from "./Skeleton/Skeleton";
 
 const App = () => {
   const location = useLocationSwap();
@@ -12,6 +13,7 @@ const App = () => {
   const [isActive, setActive] = useState(false);
   const { getFromCache, addToCache } = useCache();
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const currentLocation = location.match(locRegExp);
@@ -36,9 +38,11 @@ const App = () => {
     if (cachedUser) {
       return setCurrentUser(cachedUser);
     }
+    setLoading(true);
     const userReps = await getRepos(nickname);
     addToCache(nickname, { reps: userReps });
     setCurrentUser({ reps: userReps });
+    setLoading(false);
   };
 
   const toggleExtension = (status: boolean) => {
@@ -46,7 +50,8 @@ const App = () => {
     setActive(status);
   };
 
-  if (!isActive || !currentUser) return null;
+  if (isLoading) return <Skeleton />;
+  else if (!isActive || !currentUser) return null;
   return <Sidebar user={currentUser} />;
 };
 
