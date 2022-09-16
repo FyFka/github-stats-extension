@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { locRegExp } from "../constants";
+import { LOC_REG_EXP } from "../constants";
 import useCache from "../hooks/useCache";
 import useFetch from "../hooks/useFetch";
 import useLocationSwap from "../hooks/useLocationSwap";
@@ -16,7 +16,7 @@ const App = () => {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    const currentLocation = location.match(locRegExp);
+    const currentLocation = location.match(LOC_REG_EXP);
     if (currentLocation && document.querySelector(".js-profile-editable-replace")) {
       if (!isActive) {
         toggleExtension(true);

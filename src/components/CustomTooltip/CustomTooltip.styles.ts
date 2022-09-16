@@ -7,6 +7,7 @@ export const Box = styled.div.attrs({ className: "Box" })`
 
 export const Label = styled.p`
   margin-bottom: 5px;
+  font-weight: 500;
 `;
 
 export const Total = styled.p`

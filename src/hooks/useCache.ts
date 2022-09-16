@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { CACHE_EXPIRES_IN } from "../constants";
 import { IUser } from "../interfaces/IUser";
 
 interface ICache {
@@ -45,7 +46,7 @@ const useCache = () => {
 
   const addToCache = (nickname: string, user: IUser) => {
     setCachedUsers((prevCached) => {
-      const newCachedStorage = { ...prevCached, [nickname]: { user, timestamp: Date.now() + 60 * 60 * 1000 } };
+      const newCachedStorage = { ...prevCached, [nickname]: { user, timestamp: Date.now() + CACHE_EXPIRES_IN } };
       chrome.storage.local.set({ "gse-cached": JSON.stringify(newCachedStorage) });
       return newCachedStorage;
     });

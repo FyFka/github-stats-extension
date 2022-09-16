@@ -24,7 +24,7 @@ const LanguagesChart = ({ reps }: ILanguagesChartProps) => {
     <ResponsiveContainer width="100%" height="100%" minHeight="220px">
       <RadarChart cx="50%" cy="50%" outerRadius="80%" data={preparedLanguages}>
         <PolarGrid />
-        <PolarAngleAxis dataKey="language" stroke={neutralColor} />
+        <PolarAngleAxis dataKey="language" stroke={neutralColor} fontWeight={500} />
         <Radar dataKey="value" stroke="#1e70ef" fill="#1f6feb" fillOpacity={0.7} />
       </RadarChart>
     </ResponsiveContainer>

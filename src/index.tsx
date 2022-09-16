@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App";
-import { locRegExp } from "./constants";
+import { LOC_REG_EXP } from "./constants";
 
 const root = document.createElement("github-stats-extension");
 root.style.display = "block";
@@ -9,7 +9,7 @@ root.style.display = "block";
 const restoreRoot = () => {
   const mainContainer = document.querySelector(".js-profile-editable-replace");
   const isExists = document.querySelector("github-stats-extension");
-  if (!locRegExp.test(window.location.href) || !mainContainer || isExists) {
+  if (!LOC_REG_EXP.test(window.location.href) || !mainContainer || isExists) {
     return;
   }
 

@@ -1,7 +1,7 @@
 {
-  "name": "github-stats-extension",
-  "description": "github-stats-extension",
-  "version": "1.0",
+  "name": "Github stats extension",
+  "description": "Track your or your friends github stats",
+  "version": "1.1",
   "manifest_version": 3,
   "action": {
     "default_popup": "inactive.html",
