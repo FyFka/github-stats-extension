@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CACHE_EXPIRES_IN } from "@constants";
+import { CACHE_EXPIRES_IN, CHROME_STORAGE_KEY } from "@constants";
 import { IUser } from "@interfaces/IUser";
 
 interface ICache {
@@ -8,13 +8,11 @@ interface ICache {
 }
 
 const useCache = () => {
-  const [cachedUsers, setCachedUsers] = useState<{
-    [key: string]: ICache;
-  }>({});
+  const [cachedUsers, setCachedUsers] = useState<{ [key: string]: ICache }>({});
 
   useEffect(() => {
-    chrome.storage.local.get(["gse-cached"], (cachedStorage) => {
-      setCachedUsers(JSON.parse(cachedStorage["gse-cached"]));
+    chrome.storage.local.get(CHROME_STORAGE_KEY, (cachedStorage) => {
+      setCachedUsers(JSON.parse(cachedStorage[CHROME_STORAGE_KEY]));
     });
   }, []);
 
@@ -39,7 +37,8 @@ const useCache = () => {
     setCachedUsers((prevCached) => {
       const newCachedStorage = { ...prevCached };
       delete newCachedStorage[nickname];
-      chrome.storage.local.set({ "gse-cached": JSON.stringify(newCachedStorage) });
+      console.log({ [CHROME_STORAGE_KEY]: JSON.stringify(newCachedStorage) });
+      chrome.storage.local.set({ [CHROME_STORAGE_KEY]: JSON.stringify(newCachedStorage) });
       return newCachedStorage;
     });
   };
@@ -47,7 +46,7 @@ const useCache = () => {
   const addToCache = (nickname: string, user: IUser) => {
     setCachedUsers((prevCached) => {
       const newCachedStorage = { ...prevCached, [nickname]: { user, timestamp: Date.now() + CACHE_EXPIRES_IN } };
-      chrome.storage.local.set({ "gse-cached": JSON.stringify(newCachedStorage) });
+      chrome.storage.local.set({ [CHROME_STORAGE_KEY]: JSON.stringify(newCachedStorage) });
       return newCachedStorage;
     });
   };
