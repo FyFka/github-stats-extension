@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { CACHE_EXPIRES_IN } from "../constants";
-import { IUser } from "../interfaces/IUser";
+import { CACHE_EXPIRES_IN } from "@constants";
+import { IUser } from "@interfaces/IUser";
 
 interface ICache {
   timestamp: number;

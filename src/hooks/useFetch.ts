@@ -1,5 +1,5 @@
-import { BASE_API } from "../constants";
-import { IRepository } from "../interfaces/IRepository";
+import { BASE_API } from "@constants";
+import { IRepository } from "@interfaces/IRepository";
 
 const useFetch = () => {
   const getRepos = async (nickname: string): Promise<IRepository[]> => {

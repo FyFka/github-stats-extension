@@ -1,5 +1,5 @@
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from "recharts";
-import { IRepository } from "../../interfaces/IRepository";
+import { IRepository } from "@interfaces/IRepository";
 
 interface ILanguagesChartProps {
   reps: IRepository[];

@@ -1,6 +1,6 @@
-import { IUser } from "../../interfaces/IUser";
-import LanguagesChart from "../LanguagesChart/LanguagesChart";
-import PopularReposChart from "../PopularReposChart/PopularReposChart";
+import { IUser } from "@interfaces/IUser";
+import LanguagesChart from "@components/LanguagesChart/LanguagesChart";
+import PopularReposChart from "@components/PopularReposChart/PopularReposChart";
 import * as S from "./Sidebar.styles";
 
 interface ISidebarProps {

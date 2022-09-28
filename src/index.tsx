@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./components/App";
-import { LOC_REG_EXP } from "./constants";
+import App from "@components/App";
+import { LOC_REG_EXP } from "@constants";
 
 const root = document.createElement("github-stats-extension");
 root.style.display = "block";

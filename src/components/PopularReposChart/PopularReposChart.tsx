@@ -1,7 +1,7 @@
 import { ResponsiveContainer, Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from "recharts";
 import { CategoricalChartState } from "recharts/types/chart/generateCategoricalChart";
-import { IRepository } from "../../interfaces/IRepository";
-import CustomTooltip from "../CustomTooltip/CustomTooltip";
+import { IRepository } from "@interfaces/IRepository";
+import CustomTooltip from "@components/CustomTooltip/CustomTooltip";
 
 interface IPopularReposChartProps {
   reps: IRepository[];

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { LOC_REG_EXP } from "../constants";
-import useCache from "../hooks/useCache";
-import useFetch from "../hooks/useFetch";
-import useLocationSwap from "../hooks/useLocationSwap";
-import { IUser } from "../interfaces/IUser";
-import Sidebar from "./Sidebar/Sidebar";
-import Skeleton from "./Skeleton/Skeleton";
+import { LOC_REG_EXP } from "@constants";
+import useCache from "@hooks/useCache";
+import useFetch from "@hooks/useFetch";
+import useLocationSwap from "@hooks/useLocationSwap";
+import { IUser } from "@interfaces/IUser";
+import Sidebar from "@components/Sidebar/Sidebar";
+import Skeleton from "@components/Skeleton/Skeleton";
 
 const App = () => {
   const location = useLocationSwap();
